@@ -4,10 +4,11 @@
 
 <script>
 export default {
-  monted() {},
+  monted() { },
   methods: {},
 };
 </script>
 
 <style scoped>
+
 </style>

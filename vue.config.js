@@ -1,60 +1,35 @@
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const webpack = require('webpack')
-const path = require('path')
+const { defineConfig } = require('@vue/cli-service')
 
-let cesiumSource = './node_modules/cesium/Source'
-let cesiumWorkers = 'Workers'
-module.exports = {
-  productionSourceMap: false,
-  publicPath: process.env.NODE_ENV === 'production' ? '/webgis-demo/' : '/',
+// The path to the CesiumJS source code
+const cesiumSource = 'node_modules/cesium/Source';
+const cesiumWorkers = '../Build/Cesium/Workers';
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+
+module.exports = defineConfig({
+  transpileDependencies: true,
   configureWebpack: {
-    devtool: 'source-map',
+    output: {
+      sourcePrefix: ''
+    },
     resolve: {
-      alias: {
-        '@': path.resolve('src'),
-      },
+      fallback: { "https": false, "zlib": false, "http": false, "url": false },
+      mainFiles: ['index', 'Cesium']
     },
     plugins: [
-      new CopyWebpackPlugin([
-        {
-          from: path.join(cesiumSource, cesiumWorkers),
-          to: 'Workers',
-        },
-      ]),
-      new CopyWebpackPlugin([
-        {
-          from: path.join(cesiumSource, 'Assets'),
-          to: 'Assets',
-        },
-      ]),
-      new CopyWebpackPlugin([
-        {
-          from: path.join(cesiumSource, 'Widgets'),
-          to: 'Widgets',
-        },
-      ]),
-      new CopyWebpackPlugin([
-        {
-          from: path.join(cesiumSource, 'ThirdParty/Workers'),
-          to: 'ThirdParty/Workers',
-        },
-      ]),
-      new webpack.DefinePlugin({
-        CESIUM_BASE_URL: JSON.stringify('./'),
+      // Copy Cesium Assets, Widgets, and Workers to a static directory
+      new CopyWebpackPlugin({
+        patterns: [
+          { from: path.join(cesiumSource, cesiumWorkers), to: 'Workers' },
+          { from: path.join(cesiumSource, 'Assets'), to: 'Assets' },
+          { from: path.join(cesiumSource, 'Widgets'), to: 'Widgets' }
+        ]
       }),
+      new webpack.DefinePlugin({
+        // Define relative base path in cesium for loading assets
+        CESIUM_BASE_URL: JSON.stringify('')
+      })
     ],
-    module: {
-      unknownContextCritical: false,
-      unknownContextRegExp: /\/cesium\/cesium\/Source\/Core\/buildModuleUrl\.js/,
-      rules: [
-        {
-          test: /\.js$/,
-          include: path.resolve(__dirname, cesiumSource),
-          use: {
-            loader: require.resolve('@open-wc/webpack-import-meta-loader'),
-          },
-        },
-      ],
-    },
-  },
-}
+  }
+})

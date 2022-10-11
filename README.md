@@ -1,4 +1,4 @@
-# webgis
+# world
 
 ## Project setup
 ```

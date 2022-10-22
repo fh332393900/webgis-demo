@@ -1,13 +1,19 @@
 {
-    "[vue]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[html]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "prettier.semi": false,
-    "prettier.singleQuote": true
+   "eslint.codeActionsOnSave.rules": [],
+   "files.autoSave": "off",
+   "eslint.run": "onSave",
+   "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+      "html",
+      "vue"
+   ],
+   "eslint.options": {
+      "plugins": [
+         "html"
+      ]
+   },
+   "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+   },
 }

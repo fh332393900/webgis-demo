@@ -9,7 +9,10 @@ const webpack = require('webpack');
 
 module.exports = defineConfig({
   transpileDependencies: true,
+  productionSourceMap: false,
+  publicPath: process.env.NODE_ENV === 'production' ? '/webgis-demo/' : '/',
   configureWebpack: {
+    devtool: 'source-map',
     output: {
       sourcePrefix: ''
     },

@@ -1,5 +1,8 @@
 const dict = {
     public: [
+        { name: 'vertical_trail_line', title: '竖直尾迹线' },
+        { name: 'ground_point', title: '点(广告牌)贴地' },
+        { name: 'custom_geometry', title: '自定义几何体' },
         { name: 'tianditu_map', title: '天地图' },
         { name: 'layers_split', title: '卷帘分屏' },
         { name: 'cesium_threejs', title: 'Cesium集成Threejs' },

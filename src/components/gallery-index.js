@@ -1,7 +1,12 @@
 const dict = {
     public: [
+        { name: 'draw_point', title: '画点' },
+        { name: 'draw_line', title: '画线' },
+        { name: 'draw_circle', title: '画圆' },
+        { name: 'draw_polygon', title: '画多边形' },
+        { name: 'massive_points', title: '海量点加载' },
         { name: 'vertical_trail_line', title: '竖直尾迹线' },
-        { name: 'ground_point', title: '点(广告牌)贴地' },
+        { name: 'grounded_billboard', title: '广告牌贴地' },
         { name: 'custom_geometry', title: '自定义几何体' },
         { name: 'tianditu_map', title: '天地图' },
         { name: 'layers_split', title: '卷帘分屏' },

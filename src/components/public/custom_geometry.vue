@@ -119,11 +119,11 @@ export default {
       })
       function v_shader() {
         return `
-          attribute vec3 position3DHigh;
-          attribute vec3 position3DLow;
-          attribute float batchId;
-          attribute vec4 color;
-          varying vec4 v_color;
+          in vec3 position3DHigh;
+          in vec3 position3DLow;
+          in float batchId;
+          in vec4 color;
+          out vec4 v_color;
           void main() {
               vec4 position = czm_modelViewProjectionRelativeToEye *czm_computePosition();
               v_color = color;
@@ -132,10 +132,10 @@ export default {
       }
       function f_shader() {
         return `
-          varying vec4 v_color;
+          in vec4 v_color;
           void main() {
               vec4 color = czm_gammaCorrect(v_color);
-              gl_FragColor = color;
+              out_FragColor = color;
           }`
       }
       let appearance = new Appearance({

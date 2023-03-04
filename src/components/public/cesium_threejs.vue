@@ -16,7 +16,6 @@ import {
   Color,
 } from 'cesium'
 import * as THREE from 'three'
-import { requestAnimationFrame } from 'cesium'
 
 const cesium = {
   viewer: null,
@@ -217,7 +216,7 @@ export default {
         )
 
         // use direction from bottom left to top left as up-vector
-        console.log(centerHigh)
+
         // configure entity position and orientation
         _3Dobjects[id].threeMesh.position.copy(center)
         _3Dobjects[id].threeMesh.lookAt(
@@ -285,9 +284,9 @@ export default {
       three.renderer.render(three.scene, three.camera)
     },
     startRenderLoop() {
-      requestAnimationFrame(this.startRenderLoop)
       cesium.viewer.render()
       this.threeRender()
+      requestAnimationFrame(this.startRenderLoop)
     },
   },
 }
@@ -299,11 +298,13 @@ export default {
   height: 100%;
   width: 100%;
 }
+
 #cesiumContainer {
   position: absolute;
   height: 100%;
   width: 100%;
 }
+
 #threeContainer {
   position: absolute;
   height: 100%;
